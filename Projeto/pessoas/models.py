@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class Pessoas(models.Model):
+    nome = models.TextField(max_length=100)
+    idade = models.IntegerField()
