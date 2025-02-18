@@ -1,0 +1,9 @@
+<nav>
+  <a href="{% url 'index-pessoa' %}">Index</a>
+</nav>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Enviar" />
+</form>

@@ -10,6 +10,12 @@ def index(request):
     return render(request, 'pessoas/index.html', context)
 
 
+def detalhe(request, pk):
+    pessoa = Pessoas.objects.get(id=pk)
+    context = {'pessoa': pessoa}
+    return render(request, 'pessoas/detalhe.html', context)
+
+
 def add(request):
     form = PessoaForm()
     context = {'form': form}
@@ -20,12 +26,24 @@ def add(request):
             form.save()
             return redirect('index-pessoa')
 
-    return render(request, 'pessoas/add.html', context)
+    return render(request, 'pessoas/form.html', context)
 
 
-def remove(request):
-    return HttpResponse('Remover pessoa!')
+def remove(request, pk):
+    pessoa = Pessoas.objects.get(id=pk)
+    pessoa.delete()
+    return redirect('index-pessoa')
 
 
-def update(request):
-    return HttpResponse('Atualizar Pessoas !')
+def update(request, pk):
+    pessoa = Pessoas.objects.get(id=pk)
+    form = PessoaForm(instance=pessoa)
+
+    if request.method == 'POST':
+        form = PessoaForm(request.POST, instance=pessoa)
+        if form.is_valid():
+            form.save()
+            return redirect('index-pessoa')
+
+    context = {'form': form}
+    return render(request, 'pessoas/form.html', context)
