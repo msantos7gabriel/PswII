@@ -5,5 +5,8 @@
 <form action="" method="POST">
   {% csrf_token %}
   {{ form.as_p }}
+  {% if visible == True %}
+    <input type="reset" value="Cancelar" />
+  {% endif %}
   <input type="submit" value="Enviar" />
 </form>

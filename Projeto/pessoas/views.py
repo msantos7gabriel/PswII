@@ -18,7 +18,8 @@ def detalhe(request, pk):
 
 def add(request):
     form = PessoaForm()
-    context = {'form': form}
+    visible = True
+    context = {'form': form, 'visible': visible}
 
     if request.method == "POST":
         form = PessoaForm(request.POST)
@@ -38,6 +39,7 @@ def remove(request, pk):
 def update(request, pk):
     pessoa = Pessoas.objects.get(id=pk)
     form = PessoaForm(instance=pessoa)
+    visible = False
 
     if request.method == 'POST':
         form = PessoaForm(request.POST, instance=pessoa)
@@ -45,5 +47,5 @@ def update(request, pk):
             form.save()
             return redirect('index-pessoa')
 
-    context = {'form': form}
+    context = {'form': form, 'visible': visible}
     return render(request, 'pessoas/form.html', context)
