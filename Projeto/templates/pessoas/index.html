@@ -5,11 +5,13 @@
 <ul>
   {% for pessoa in pessoas %}
     <li>
-      <strong>Nome:</strong> {{ pessoa.nome }} <br /> <strong>Idade:</strong> {{ pessoa.idade }}
+      <strong>Nome:</strong> {{ pessoa.nome }}
+      <br /> <strong>Idade:</strong> {{ pessoa.idade }}
     </li>
+
     <a href="{% url 'detalhe-pessoa' pessoa.id %}">Detalhe</a>
-    <a href="{% url 'remove-pessoa' pessoa.id %}">Deletar</a>
     <a href="{% url 'edit-pessoa' pessoa.id %}">Editar</a>
+    <a href="{% url 'remove-pessoa' pessoa.id %}">Deletar</a>
     <hr />
   {% endfor %}
 </ul>

@@ -4,6 +4,10 @@ from .forms import PessoaForm
 from django.http import HttpResponse
 
 
+def index_redirect(request):
+    return redirect('index-pessoa')
+
+
 def index(request):
     pessoas = Pessoas.objects.all()
     context = {'pessoas': pessoas}
@@ -19,7 +23,7 @@ def detalhe(request, pk):
 def add(request):
     form = PessoaForm()
     visible = True
-    context = {'form': form, 'visible': visible}
+    name = 'Adicionar'
 
     if request.method == "POST":
         form = PessoaForm(request.POST)
@@ -27,6 +31,7 @@ def add(request):
             form.save()
             return redirect('index-pessoa')
 
+    context = {'form': form, 'visible': visible, 'name': name}
     return render(request, 'pessoas/form.html', context)
 
 
@@ -40,6 +45,7 @@ def update(request, pk):
     pessoa = Pessoas.objects.get(id=pk)
     form = PessoaForm(instance=pessoa)
     visible = False
+    name = 'Editar'
 
     if request.method == 'POST':
         form = PessoaForm(request.POST, instance=pessoa)
@@ -47,5 +53,5 @@ def update(request, pk):
             form.save()
             return redirect('index-pessoa')
 
-    context = {'form': form, 'visible': visible}
+    context = {'form': form, 'visible': visible, 'name': name}
     return render(request, 'pessoas/form.html', context)
