@@ -1,13 +1,17 @@
-<h1>{{ pessoa.nome }}</h1>
-<p>
-  <strong>Idade:</strong> {{ pessoa.idade }}
-  <br /> <strong>Porte de Arma:</strong> {% if pessoa.porte_de_arma %}
-    Possui
-  {% else %}
-    Não Possui
-  {% endif %}
-  <br /> <strong>Nascimento:</strong>
-  {{ pessoa.nascimento }}
-</p>
+{% extends '_base.html' %}
 
-<a href="{% url 'index-pessoa' %}">Voltar</a>
+{% block content %}
+  <h1>{{ pessoa.nome }}</h1>
+  <p>
+    <strong>Idade:</strong> {{ pessoa.idade }}
+    <br /> <strong>Porte de Arma:</strong> {% if pessoa.porte_de_arma %}
+      Possui
+    {% else %}
+      Não Possui
+    {% endif %}
+    <br /> <strong>Nascimento:</strong>
+    {{ pessoa.nascimento }}
+  </p>
+
+  <a href="{% url 'index-pessoa' %}">Voltar</a>
+{% endblock %}
